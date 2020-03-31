@@ -1,4 +1,9 @@
-project(gnucash_addon)
+cmake_minimum_required (VERSION 3.5)
+
+project (gnucash_addon
+  VERSION 0.1
+)
+
 cmake_minimum_required(VERSION 3.5)
 
 # SET(CMAKE_BUILD_TYPE "Debug")

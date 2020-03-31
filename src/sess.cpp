@@ -22,10 +22,8 @@ void start_sess(const char *fname) {
   QofBackendError backend_err;
   char *newfile;
 
-  gnc_module_init_backend_xml();
-  gnc_engine_init(0, NULL);
-
-  qof_event_suspend ();
+  patcher_init_gnc_modules();
+  // qof_event_suspend ();
 
   sess = qof_session_new();
   newfile = (char *)fname;
@@ -41,16 +39,12 @@ void start_sess(const char *fname) {
   book = qof_session_get_book(sess);
   printf("File path: %s", qof_session_get_file_path(sess));
 
-  // xaccLogDisable();
   qof_session_load(sess, sess_load_cb);
-  // xaccLogEnable();
 
   if (backend_err = qof_session_get_error(sess)) {
     printf("Some error occured when loading session. (%d)\n", backend_err);
     // return;
   }
-
-  // return;
 
   book = qof_session_get_book(sess);
   // be = qof_book_get_backend(book);
@@ -88,4 +82,9 @@ void start_sess(const char *fname) {
 
 void sess_load_cb (const char *message, double percentage) {
   printf("Loading the file (%d): %s: \n", (int)percentage, message);
+}
+
+void patcher_init_gnc_modules () {
+  gnc_module_init_backend_xml();
+  gnc_engine_init(0, NULL);
 }
