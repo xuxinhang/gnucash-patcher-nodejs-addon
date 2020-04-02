@@ -3,13 +3,11 @@ message("CONFIG_H=${CONFIG_H}")
 
 set(pat_SOURCES
   sess.cpp
-  files.cpp
   book-patcher.cpp
 )
 
 set(pat_HEADERS
   sess.hpp
-  files.hpp
   book-patcher.hpp
 )
 
@@ -59,5 +57,8 @@ target_include_directories (pat
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
     PRIVATE ${pat_ALL_INCLUDES}
 )
+
+
+# TEST
 
 add_subdirectory(test)

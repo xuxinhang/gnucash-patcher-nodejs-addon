@@ -1,9 +1,10 @@
 /* book patcher */
 
 #ifndef PAT_BOOK_PATCHER_H
-#define PAT_BOOK_PATCGER_H
+#define PAT_BOOK_PATCHER_H
 
 #include <glib.h>
+
 #include "gnc-date.h"
 #include "qof.h"
 #include "Account.h"
