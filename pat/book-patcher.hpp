@@ -5,9 +5,11 @@
 
 #include <glib.h>
 #include "gnc-date.h"
+#include "qof.h"
+#include "Account.h"
 
 typedef struct TransferRecord {
-  char *dateStr;
+  char *dateStr; // not used
   time64 timestamp;
   char *description;
   char *sourceAccount; // account code
@@ -16,7 +18,13 @@ typedef struct TransferRecord {
   int denom;
 } TransferRecord;
 
-class BookPatcher;
+class BookPatcher {
+  public:
+  QofBook *book;
+  Account *root_account;
 
+  BookPatcher(QofBook *init_book);
+  bool addTransfer(TransferRecord *record);
+};
 
 #endif

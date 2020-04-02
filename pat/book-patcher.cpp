@@ -12,18 +12,10 @@
 #include "gnc-commodity.h"
 
 
-class BookPatcher {
-  public:
-  QofBook *book;
-  Account *root_account;
-
-  BookPatcher(QofBook *init_book) {
-    book = init_book;
-    root_account = gnc_book_get_root_account(book);
-  }
-
-  bool addTransfer(TransferRecord *record);
-};
+BookPatcher::BookPatcher(QofBook *init_book) {
+  book = init_book;
+  root_account = gnc_book_get_root_account(book);
+}
 
 bool BookPatcher::addTransfer(TransferRecord *record) {
   Account *sourceAct, *targetAct;
@@ -33,18 +25,18 @@ bool BookPatcher::addTransfer(TransferRecord *record) {
   gnc_commodity *currency;
   currency = xaccAccountGetCommodity(targetAct);
 
-  time64 timestamp = 0;
+  time64 timestamp = record->timestamp;
   gnc_numeric targetAmount = gnc_numeric_create(record->amount, record->denom);
   gnc_numeric sourceAmount = gnc_numeric_neg(targetAmount);
 
   Transaction *trans = xaccMallocTransaction(book);
   xaccTransBeginEdit(trans);
 
-  // xaccTransSetDatePostedSecs(trans, );
   xaccTransSetDatePostedSecsNormalized(trans, timestamp);
   xaccTransSetDateEnteredSecs(trans, timestamp);
   // xaccTransSetNum(trans, "Bla...");
-  // xaccTransSetNotes(trans, "Bla...");
+  // xaccTransSetNotes(trans, record->description);
+  xaccTransSetDescription(trans, record->description);
   xaccTransSetCurrency(trans, currency);
 
   // the split for the source account
