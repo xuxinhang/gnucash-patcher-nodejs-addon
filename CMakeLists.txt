@@ -10,7 +10,7 @@ cmake_minimum_required(VERSION 3.5)
 
 set(GNC_SRC_DIR ${PROJECT_SOURCE_DIR}/gnucash)
 set(GNC_LIBGNC_SOURCE_DIR ${GNC_SRC_DIR}/libgnucash)
-set(MAIN_SOURCE_DIR src)
+set(PAT_SOURCE_DIR pat)
 
 
 option (WITH_SQL "Build this project with SQL (libdbi) support" OFF)
@@ -21,7 +21,7 @@ option (WITH_PYTHON "enable python plugin and bindings" OFF)
 option (GENERATE_SWIG_WRAPPERS "SWIG" ON)
 
 add_subdirectory(${GNC_SRC_DIR})
-
-add_subdirectory(src)
+add_subdirectory(pat)
+add_subdirectory(entry)
 
 

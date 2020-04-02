@@ -6,6 +6,6 @@
 
 void start_sess(const char *fname);
 void sess_load_cb (const char *message, double percentage);
-void patcher_init_gnc_modules();
+void pat_init_gnc_modules();
 
 #endif

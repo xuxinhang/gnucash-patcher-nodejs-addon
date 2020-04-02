@@ -22,7 +22,7 @@ void start_sess(const char *fname) {
   QofBackendError backend_err;
   char *newfile;
 
-  patcher_init_gnc_modules();
+  pat_init_gnc_modules();
   // qof_event_suspend ();
 
   sess = qof_session_new();
@@ -36,7 +36,7 @@ void start_sess(const char *fname) {
   }
 
   QofBook *book = nullptr;
-  book = qof_session_get_book(sess);
+  // book = qof_session_get_book(sess);
   printf("File path: %s", qof_session_get_file_path(sess));
 
   qof_session_load(sess, sess_load_cb);
@@ -84,7 +84,7 @@ void sess_load_cb (const char *message, double percentage) {
   printf("Loading the file (%d): %s: \n", (int)percentage, message);
 }
 
-void patcher_init_gnc_modules () {
+void pat_init_gnc_modules () {
   gnc_module_init_backend_xml();
   gnc_engine_init(0, NULL);
 }

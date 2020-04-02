@@ -2,7 +2,6 @@ set (CONFIG_H ${CMAKE_BINARY_DIR}/gnucash/common/config.h )
 message("CONFIG_H=${CONFIG_H}")
 
 set(pat_SOURCES
-  main.cpp
   sess.cpp
   files.cpp
   book-patcher.cpp
@@ -54,10 +53,9 @@ set(pat_ALL_INCLUDES ${GIO_INCLUDE_DIRS} ${LIBXML2_INCLUDE_DIRS}
 
 set_source_files_properties (${pat_SOURCES} PROPERTIES OBJECT_DEPENDS ${CONFIG_H})
 
-add_executable (hello ${pat_ALL_SOURCES})
-target_link_libraries(hello ${pat_ALL_LIBRARIES})
-
-target_include_directories (hello
+add_library (pat ${pat_ALL_SOURCES})
+target_link_libraries(pat ${pat_ALL_LIBRARIES})
+target_include_directories (pat
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
     PRIVATE ${pat_ALL_INCLUDES}
 )
