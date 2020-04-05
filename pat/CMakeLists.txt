@@ -47,15 +47,15 @@ set(pat_ALL_LIBRARIES
 )
 
 set(pat_ALL_INCLUDES ${GIO_INCLUDE_DIRS} ${LIBXML2_INCLUDE_DIRS}
-    ${LIBXSLT_INCLUDE_DIRS} ${GNC_SRC_DIR}/libgnucash/backend ${GNC_SRC_DIR}/libgnucash/engine)
+  ${LIBXSLT_INCLUDE_DIRS} ${GNC_SRC_DIR}/libgnucash/backend ${GNC_SRC_DIR}/libgnucash/engine)
 
 set_source_files_properties (${pat_SOURCES} PROPERTIES OBJECT_DEPENDS ${CONFIG_H})
 
 add_library (pat ${pat_ALL_SOURCES})
 target_link_libraries(pat ${pat_ALL_LIBRARIES})
 target_include_directories (pat
-    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
-    PRIVATE ${pat_ALL_INCLUDES}
+  PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
+  PUBLIC ${pat_ALL_INCLUDES}
 )
 
 

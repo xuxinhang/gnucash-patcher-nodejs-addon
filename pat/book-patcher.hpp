@@ -9,14 +9,16 @@
 #include "qof.h"
 #include "Account.h"
 
+void init_gnc_modules();
+
 typedef struct TransferRecord {
-  char *dateStr; // not used
   time64 timestamp;
   char *description;
   char *sourceAccount; // account code
   char *targetAccount; // account code
   int amount;
   int denom;
+  char reconcileState;
 } TransferRecord;
 
 class BookPatcher {

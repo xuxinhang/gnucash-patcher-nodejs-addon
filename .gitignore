@@ -1,5 +1,7 @@
 .vscode
 .vs
+node_modules
+package-lock.json
 gnucash
 dist
 build

@@ -30,7 +30,6 @@ int main() {
 
   // initialize some values of a defined struct
   TransferRecord record;
-  record.dateStr = (char*)"2020-02-24 08:30";
   record.amount = 460;
   record.denom = 100;
   record.description = (char*)"Enjoy a splendent dinner.";

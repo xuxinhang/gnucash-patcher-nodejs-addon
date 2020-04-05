@@ -5,7 +5,6 @@
 // #include "gnc-uri-utils.h"
 
 #include "sess.hpp"
-#include "files.hpp"
 // #include "common.h"
 
 int main () {

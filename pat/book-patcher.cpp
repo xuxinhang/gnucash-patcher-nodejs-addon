@@ -1,6 +1,9 @@
+#include <iterator>
 
 #include <config.h>
 #include "book-patcher.hpp"
+#include "sess.hpp"
+
 #include "common.h"
 #include <glib.h>
 #include "qof.h"
@@ -10,7 +13,13 @@
 #include "Transaction.h"
 #include "Split.h"
 #include "gnc-commodity.h"
+#include "gnc-backend-xml.h"
 
+
+void init_gnc_modules () {
+  gnc_module_init_backend_xml();
+  gnc_engine_init(0, NULL);
+}
 
 BookPatcher::BookPatcher(QofBook *init_book) {
   book = init_book;
@@ -45,6 +54,7 @@ bool BookPatcher::addTransfer(TransferRecord *record) {
   xaccAccountInsertSplit(sourceAct, sourceSplit);
   xaccSplitSetValue(sourceSplit, sourceAmount);
   xaccSplitSetAmount(sourceSplit, sourceAmount);
+  xaccSplitSetReconcile(sourceSplit, record->reconcileState);
 
   // the split for the target account
   Split *targetSplit = xaccMallocSplit(book);
@@ -52,6 +62,7 @@ bool BookPatcher::addTransfer(TransferRecord *record) {
   xaccAccountInsertSplit(targetAct, targetSplit);
   xaccSplitSetValue(targetSplit, targetAmount);
   xaccSplitSetAmount(targetSplit, targetAmount);
+  xaccSplitSetReconcile(targetSplit, record->reconcileState);
 
   xaccTransCommitEdit(trans);
 
