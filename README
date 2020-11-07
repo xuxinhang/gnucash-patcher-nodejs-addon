@@ -1,0 +1,67 @@
+
+A Node.js Addon for Adding Transactions to GnuCash Files
+========================
+This addon can append some transactions into a gnucash file.
+
+
+Usage
+========================
+Please refer the test files in ./test-nodejs for usage.
+
+
+
+Build & Test: Step by Step
+========================
+
+Prepare for Building
+------------------------
+* Ensure you can successfully build gnucash itself
+  - You need CMake and other libraries
+  - Some functions such as Python interface is not necessary. You can toggle the corresponding switches in CMakeLists.txt located at root dir
+  - Reference:
+    - GnuCash's Wiki: https://wiki.gnucash.org/wiki/Building
+    - The README file in GunCash's repository
+
+
+Start Building
+------------------------
+1. > npm install --dev
+2. > npm install -g cmake-js
+3. Copy files (or create symbol link) from GnuCash's repository to /gnucash
+4. Just execuate:
+   > cmake-js
+
+Node.js official docs offers some good examples for a quick start
+
+
+Do Some Testing
+------------------------
+First, copy ./test-nodejs/example_zero.gnucash to /mnt/e/example.gnucash.
+Then, you can:
+
+A. Test the node addon
+  1. > node ./test-nodejs/test-node-addon.js
+  2. Check whether the information in ./test-nodejs/_sample_data.json has been patched to /mnt/e/example.gnucash
+
+B. Unit test
+  * There is an uint test for patcher module:
+  * ./pat/test/test-book-patcher.cpp
+  * Just run the corresponding binary in ./build to run this test
+
+C. Another simple demo
+  * ./entry/main.cpp is a simple program about loading a file and searching an specific account.
+  * Just run the corresponding binary in ./build to run this demo.
+
+
+
+Reference
+========================
+1. Some great demos about CMake is offered at https://github.com/ttroy50/cmake-examples
+2. GnuCash Wiki: "Building" and "Using the API"
+3. GnuCash repository -> README
+4. Node.js Docs -> N-API & C++ Addon
+5. Official Node.js addon examples is offered at https://github.com/nodejs/node-addon-examples
+
+
+
+
