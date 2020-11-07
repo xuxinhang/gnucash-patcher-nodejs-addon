@@ -6,12 +6,16 @@ project (gnucash_addon
 
 cmake_minimum_required(VERSION 3.5)
 
-# SET(CMAKE_BUILD_TYPE "Debug")
-
 set(GNC_SRC_DIR ${PROJECT_SOURCE_DIR}/gnucash)
 set(GNC_LIBGNC_SOURCE_DIR ${GNC_SRC_DIR}/libgnucash)
 set(PAT_SOURCE_DIR pat)
 
+# set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+# set(BUILD_SHARED_LIBS OFF)
+# set(GCC_CXX_FLAGS ${GCC_CXX_FLAGS} "-static")
+
+# prior to use attched *.so files
+set(CMAKE_BUILD_RPATH "$ORIGIN/third_party:/tmp")
 
 option (WITH_SQL "Build this project with SQL (libdbi) support" OFF)
 option (WITH_AQBANKING "Build this project with aqbanking (online banking) support" OFF)

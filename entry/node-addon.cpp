@@ -30,19 +30,20 @@ Napi::Boolean pat_method(const Napi::CallbackInfo& info) {
     return Napi::Boolean::New(env, false);
   }
 
-  if (!info[0].IsString() || !info[1].IsArray()) {
+  if (!info[1].IsString() || !info[0].IsArray()) {
     Napi::TypeError::New(env, "Wrong arguments").ThrowAsJavaScriptException();
     return Napi::Boolean::New(env, false);
   }
 
-  std::string uri = info[0].As<Napi::String>().Utf8Value();
-  Napi::Array narray_records = info[1].As<Napi::Array>();
-  std::cout << "The book file is " << uri << std::endl;
+  std::string sourceURI = info[1].As<Napi::String>().Utf8Value();
+  // std::string targetURI = info[2].As<Napi::String>().Utf8Value();
+  Napi::Array narray_records = info[0].As<Napi::Array>();
+  std::cout << "The book file is " << sourceURI << std::endl;
 
   init_gnc_modules();
 
   QofSession *sess = qof_session_new();
-  qof_session_begin(sess, uri.c_str(), true, false, true);
+  qof_session_begin(sess, sourceURI.c_str(), true, false, true);
   qof_session_load(sess, [](const char *msg, double perc) -> void {
     // std::cout << "[" << (int)perc << "%] book loading: " << (msg ? msg : "") << std::endl;
   });
